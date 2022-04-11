@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="css/usuarios.css">
+
+</head>
+
+<body>
+    
+    <main>
+        
+        <div class="pantallaingreso">
+        
+            <h1>Ingresa tu Usuario</h1>
+        
+            <section>
+            
+                <input type="text" placeholder="Nombre y Apellido" id="usuario"></input>
+
+                <input type="number" placeholder="Edad" id="edad"></input>
+                
+                <div>
+                <button id="bot1" onclick="ingresoUsuario()">Iniciar</button>
+                <button id="bot2" onclick="eliminar()">Eliminar</button>
+                </div>
+        
+            </section>
+        </div>
+        
+        <div class="pantallaOk ocultar">
+            <span></span>
+            <button onclick="volver()">Volver atras</button>
+        </div>
+        
+        <div class="pantallaError ocultar">
+            <span class="error">Tienes menos de 18 años, no eres bienvenido!</span>
+            <button onclick="volver()">Volver atras</button>
+        </div>
+    </main>
+
+
+</body>
+
+    <script>
+    
+    function ingresoUsuario(){
+    var nombreApellido = document.body.querySelector("#usuario").value
+    var edad = document.body.querySelector("#edad").value
+    
+    if (nombreApellido == ""){
+        document.body.querySelector("#usuario").classList.add("error")
+        return
+    }
+    else {document.body.querySelector("#usuario").classList.remove("error")
+    }
+
+    if (edad == ""){
+        document.body.querySelector("#edad").classList.add("error")
+        return
+    }
+    else {document.body.querySelector("#edad").classList.remove("error")
+    }
+
+    ocultarElemento (".pantallaingreso" , true)
+
+    if (edad >= 18){
+        colocartexto (".pantallaOk > span", `Hola ${nombreApellido} de ${edad} años, BIENVENIDO!`)
+        ocultarElemento (".pantallaOk" , false) 
+    }
+    else {
+        ocultarElemento (".pantallaError" , false) 
+    }
+    }
+
+    function eliminar(){
+        colocarvalor("#usuario", "")
+        colocarvalor("#edad", "")
+    }
+
+    function volver(){
+        ocultarElemento (".pantallaOk" , true)
+        ocultarElemento (".pantallaError" , true)
+        ocultarElemento (".pantallaingreso" , false)
+    }
+
+    function ocultarElemento(nombredeelemento, estaoculto){
+        if (estaoculto){
+            document.body.querySelector(nombredeelemento).classList.add("ocultar")
+        }
+        else {document.body.querySelector(nombredeelemento).classList.remove("ocultar")}
+    }
+    
+    function colocartexto(nombredeelemento, valor) {
+        document.body.querySelector(nombredeelemento).innerHTML = valor
+    }
+
+    function colocarvalor(nombredeelemento, valor) {
+        document.body.querySelector(nombredeelemento).value = valor
+    }
+
+
+    </script>
+
+</html>
